@@ -33,10 +33,10 @@ fn get_addable_game_id(entry:String) -> u32{
 } 
 
 
-fn get_max_ball_count(total_rounds: String) -> BallCount{
-    let mut red_count: u32 = 0;
-    let mut blue_count: u32 = 0;
-    let mut green_count: u32 = 0;
+pub fn get_max_ball_count(total_rounds: String) -> BallCount{
+    let mut red_count: u32 = 1;
+    let mut blue_count: u32 = 1;
+    let mut green_count: u32 = 1;
 
     for round in total_rounds.split(";"){
         for ball in round.split(","){
