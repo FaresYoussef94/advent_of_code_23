@@ -1,4 +1,5 @@
 mod day_one;
+mod utils;
 
 use day_one::d1p1;
 use day_one::d1p2;

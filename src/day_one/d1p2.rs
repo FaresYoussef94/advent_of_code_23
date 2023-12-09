@@ -1,6 +1,5 @@
-
-use crate::day_one::d1p1::{read_lines, get_first_and_last_digits};
-
+use crate::day_one::d1p1::get_first_and_last_digits;
+use crate::utils::file_reader::read_lines;
 use super::d1_structs::{ValueNIndex, TextValue};
 
 

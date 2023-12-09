@@ -1,8 +1,6 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::str::Chars;
 use crate::day_one::d1_structs::ValueNIndex;
+use crate::utils::file_reader::read_lines;
 
 pub fn d1p1() {
     let mut result: u32 = 0;
@@ -24,12 +22,6 @@ pub fn d1p1() {
     }
 
     println!("D1P2 result: {}", result);
-}
-
-pub fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
 
 
