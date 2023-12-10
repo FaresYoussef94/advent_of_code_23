@@ -1,4 +1,3 @@
-
 use crate::utils::file_reader::read_lines;
 use crate::day_four::d4_structs::GameDefinition;
 
@@ -81,6 +80,8 @@ fn calculate_round_winning(game_definition: &GameDefinition) -> u32 {
             }
 
         }
+    }
+    if round_result == 0 {
     }
     round_result
 }
