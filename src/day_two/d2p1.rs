@@ -40,8 +40,8 @@ pub fn get_max_ball_count(total_rounds: String) -> BallCount{
 
     for round in total_rounds.split(";"){
         for ball in round.split(","){
-            let count = ball.clone().trim().split(" ").nth(0).unwrap().to_string().parse::<u32>().unwrap();
-            let colour = ball.clone().trim().split(" ").nth(1).unwrap();
+            let count = ball.trim().split(" ").nth(0).unwrap().to_string().parse::<u32>().unwrap();
+            let colour = ball.trim().split(" ").nth(1).unwrap();
             
             match colour {
                 "red" => {
