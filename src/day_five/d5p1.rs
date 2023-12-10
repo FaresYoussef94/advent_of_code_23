@@ -71,37 +71,37 @@ pub fn build_almanac() -> Almanac {
     }
 }
 
-fn get_lowest_location(almanac: &Almanac) -> u32 {
-    let mut result = u32::MAX;
+fn get_lowest_location(almanac: &Almanac) -> u64 {
+    let mut result = u64::MAX;
 
     for seed in almanac.seeds.iter() {
-        let soil = get_mapping_value(*seed, &almanac.seed_to_soil); 
+        let soil = get_mapping_value(*seed as u64, &almanac.seed_to_soil); 
         let fertilizer = get_mapping_value(soil, &almanac.soil_to_fertilizer); 
         let water = get_mapping_value(fertilizer, &almanac.fertilizer_to_water); 
         let light = get_mapping_value(water, &almanac.water_to_light); 
         let temperature = get_mapping_value(light, &almanac.light_to_temperature); 
         let humidity = get_mapping_value(temperature, &almanac.temperature_to_humidity); 
         let location = get_mapping_value(humidity, &almanac.humidity_to_location); 
-        result = u32::min(result, location);
+        result = u64::min(result, location);
     }
 
     result
 }
 
-fn get_mapping_value(num:u32, mappings: &Vec<Map>) -> u32 {
+pub fn get_mapping_value(num:u64, mappings: &Vec<Map>) -> u64 {
    for map_item in mappings {
-        if is_within_range(num, map_item.source, map_item.count) {
-            return get_precise_destination(num, map_item.source, map_item.destination);
+        if is_within_range(num.into(), map_item.source.into(), map_item.count.into()) {
+            return get_precise_destination(num, map_item.source.into(), map_item.destination.into());
         }
     }
     num
 }
 
-fn is_within_range(num: u32, source:u32, count:u32) -> bool {
+pub fn is_within_range(num: u64, source:u64, count:u64) -> bool {
    num >= source && num <= source + count -1
 }
 
-fn get_precise_destination(num:u32, source:u32, destination:u32) -> u32 {
+pub fn get_precise_destination(num:u64, source:u64, destination:u64) -> u64 {
     destination + (num - source)
 }
 

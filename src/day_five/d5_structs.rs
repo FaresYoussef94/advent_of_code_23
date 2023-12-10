@@ -27,3 +27,9 @@ pub struct Map {
     pub destination: u32,
     pub count: u32,
 }
+
+
+pub struct SeedRange{
+    pub i: u64,
+    pub j: u64,
+}
