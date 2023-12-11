@@ -23,6 +23,7 @@ use day_five::d5p1;
 // use day_five::d5p2;
 
 use day_six::d6p1;
+use day_six::d6p2;
 
 fn main() {
     d1p1::d1p1();
@@ -35,5 +36,6 @@ fn main() {
     d4p2::d4p2();
     d5p1::d5p1();
     // d5p2::d5p2();
-    d6p1::d6p1();
+    // d6p1::d6p1();
+    d6p2::d6p2();
 }

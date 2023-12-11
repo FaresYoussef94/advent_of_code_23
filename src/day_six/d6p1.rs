@@ -1,7 +1,7 @@
 use array2d::Array2D;
 use crate::{day_six::d6_structs::TimeDistance, utils::file_reader::read_lines};
 
-const MAXIMUM_RACE_TIME:usize = 86;
+const MAXIMUM_RACE_TIME:usize = 60808676;
 
 pub fn d6p1() {
     let arr = build_dp_array();
@@ -12,6 +12,9 @@ pub fn d6p1() {
 
 pub fn build_dp_array () -> Array2D<usize> {
     let mut arr:Array2D<usize> = Array2D::filled_with(0, MAXIMUM_RACE_TIME+1, MAXIMUM_RACE_TIME+1);
+
+
+    println!("arr size: {:?}", arr);
 
     for i in 1..=MAXIMUM_RACE_TIME {
         for j in 1..=MAXIMUM_RACE_TIME {
