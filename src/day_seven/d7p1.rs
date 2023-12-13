@@ -10,7 +10,7 @@ pub fn d7p1 () {
     println!("D7P1 result: {}", result);
 }
 
-fn calculate_winnings(bids:&Vec<Bid>) -> u32 {
+pub fn calculate_winnings(bids:&Vec<Bid>) -> u32 {
     let mut result: u32 = 0;
 
     for i in 0..bids.len() {
@@ -20,7 +20,7 @@ fn calculate_winnings(bids:&Vec<Bid>) -> u32 {
     result
 }
 
-pub fn build_up_bids() -> Vec<Bid> {
+fn build_up_bids() -> Vec<Bid> {
     let mut bids:Vec<Bid> = Vec::new();
 
        if let Ok(lines) = read_lines("./resources/d7.txt") {
