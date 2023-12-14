@@ -28,7 +28,6 @@ fn build_up_bids() -> Vec<Bid> {
             if let Ok(entry) = line {
                 let (card, bid) = get_cards_and_bid(&entry);
                 let card_kind = determine_kind(card);
-                println!("{} {:?}", card, card_kind);
                 bids.push(Bid {bid, card: String::from(card), card_kind });
             }
         }

@@ -13,7 +13,6 @@ pub fn d6p1() {
 pub fn build_dp_array () -> Array2D<usize> {
     let mut arr:Array2D<usize> = Array2D::filled_with(0, MAXIMUM_RACE_TIME+1, MAXIMUM_RACE_TIME+1);
 
-
     println!("arr size: {:?}", arr);
 
     for i in 1..=MAXIMUM_RACE_TIME {

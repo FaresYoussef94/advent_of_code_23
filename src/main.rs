@@ -31,6 +31,7 @@ use day_seven::d7p1;
 use day_seven::d7p2;
 
 use day_eigth::d8p1;
+use day_eigth::d8p2;
 
 fn main() {
     d1p1::d1p1();
@@ -48,5 +49,6 @@ fn main() {
     d7p1::d7p1();
     d7p2::d7p2();
     d8p1::d8p1();
+    d8p2::d8p2();
 
 }
