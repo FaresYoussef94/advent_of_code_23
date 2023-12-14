@@ -9,51 +9,21 @@ mod day_seven;
 mod day_eigth;
 mod day_nine;
 
-use day_one::d1p1;
-use day_one::d1p2;
+use clap::Parser;
+use utils::challenge_init::call_challenge;
 
-use day_two::d2p1;
-use day_two::d2p2;
-
-
-use day_three::d3p1;
-use day_three::d3p2;
-
-use day_four::d4p1;
-use day_four::d4p2;
-
-use day_five::d5p1;
-// use day_five::d5p2;
-
-// use day_six::d6p1;
-use day_six::d6p2;
-
-use day_seven::d7p1;
-use day_seven::d7p2;
-
-use day_eigth::d8p1;
-use day_eigth::d8p2;
-
-use day_nine::d9p1;
-use day_nine::d9p2;
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    #[arg(short, long)]
+    day: u8,
+    #[arg(short, long)]
+    part: u8,
+}
 
 fn main() {
-    d1p1::d1p1();
-    d1p2::d1p2();
-    d2p1::d2p1();
-    d2p2::d2p2();
-    d3p1::d3p1();
-    d3p2::d3p2();
-    d4p1::d4p1();
-    d4p2::d4p2();
-    d5p1::d5p1();
-    // d5p2::d5p2();
-    // d6p1::d6p1();
-    d6p2::d6p2();
-    d7p1::d7p1();
-    d7p2::d7p2();
-    d8p1::d8p1();
-    d8p2::d8p2();
-    d9p1::d9p1();
-    d9p2::d9p2();
+
+    let args = Args::parse();
+    call_challenge(args.day, args.part);
 }

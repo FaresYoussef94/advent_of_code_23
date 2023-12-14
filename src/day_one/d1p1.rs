@@ -21,7 +21,7 @@ pub fn d1p1() {
         }
     }
 
-    println!("D1P2 result: {}", result);
+    println!("D1P1 result: {}", result);
 }
 
 

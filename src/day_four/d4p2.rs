@@ -1,4 +1,4 @@
-use crate::d4p1::get_game_definitions;
+use crate::day_four::d4p1::get_game_definitions;
 
 use super::d4_structs::GameDefinition;
 

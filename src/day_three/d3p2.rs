@@ -1,5 +1,5 @@
 use array2d::Array2D;
-use crate::d3p1::{get_2d_array, is_char_num};
+use crate::day_three::d3p1::{get_2d_array, is_char_num};
 
 const GEAR_CHAR:char = '*';
 
