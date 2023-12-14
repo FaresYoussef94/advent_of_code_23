@@ -59,7 +59,7 @@ fn get_engine_model(arr: Array2D<char>) -> u32 {
 }
 
 pub fn is_char_num(arr: &Array2D<char>, i:usize, j: usize) -> bool {
-    i > 0 && i < 140 && j > 0 && j < 140 && arr.get(i,j).unwrap().is_digit(10)
+    i > 0 && i< 140 && j > 0 && j < 140 && arr.get(i,j).unwrap().is_digit(10)
 }
 
 fn is_number_adjacent_to_symbol(arr: &Array2D<char>, i:i32, j:i32, k:i32) -> bool {

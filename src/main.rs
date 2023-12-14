@@ -7,6 +7,7 @@ mod day_five;
 mod day_six;
 mod day_seven;
 mod day_eigth;
+mod day_nine;
 
 use day_one::d1p1;
 use day_one::d1p2;
@@ -24,7 +25,7 @@ use day_four::d4p2;
 use day_five::d5p1;
 // use day_five::d5p2;
 
-use day_six::d6p1;
+// use day_six::d6p1;
 use day_six::d6p2;
 
 use day_seven::d7p1;
@@ -32,6 +33,9 @@ use day_seven::d7p2;
 
 use day_eigth::d8p1;
 use day_eigth::d8p2;
+
+use day_nine::d9p1;
+use day_nine::d9p2;
 
 fn main() {
     d1p1::d1p1();
@@ -50,5 +54,5 @@ fn main() {
     d7p2::d7p2();
     d8p1::d8p1();
     d8p2::d8p2();
-
+    d9p1::d9p1();
 }
