@@ -24,7 +24,7 @@ fn get_hash_sum() -> u32{
     sum
 }
 
-fn get_hash(chars: &Chars) -> u32 {
+pub fn get_hash(chars: &Chars) -> u32 {
     let mut hash_value:u32 = 0;
 
     for ch in chars.clone().into_iter() {
