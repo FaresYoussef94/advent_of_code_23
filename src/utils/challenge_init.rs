@@ -25,6 +25,9 @@ use crate::day_eigth::d8p2::d8p2;
 use crate::day_nine::d9p1::d9p1;
 use crate::day_nine::d9p2::d9p2;
 
+use crate::day_fifteen::d15p1::d15p1;
+use crate::day_fifteen::d15p2::d15p2;
+
 pub fn call_challenge(day:u8, part:u8) {
     match day { 
         1 => call_part(part, d1p1, d1p2),
@@ -36,6 +39,7 @@ pub fn call_challenge(day:u8, part:u8) {
         7 => call_part(part, d7p1, d7p2),
         8 => call_part(part, d8p1, d8p2),
         9 => call_part(part, d9p1, d9p2),
+        15 => call_part(part, d15p1, d15p2),
         _ => unimplemented!() 
         
     }
