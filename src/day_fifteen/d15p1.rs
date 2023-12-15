@@ -14,9 +14,7 @@ fn get_hash_sum() -> u32{
     if let Ok(lines) = read_lines("./resources/d15.txt") {
         for line in lines {
             if let Ok(entry) = line {
-                println!("Line: {}", entry);
                 for chars in entry.split(",") {
-                    println!("Chars: {}", chars);
                     sum += get_hash(&chars.chars());
                 }
             }
@@ -35,7 +33,6 @@ fn get_hash(chars: &Chars) -> u32 {
         hash_value %= 256;
     }
 
-    println!("{:?} {}", chars, hash_value);
     hash_value
 }
 
