@@ -8,6 +8,7 @@ mod day_six;
 mod day_seven;
 mod day_eigth;
 mod day_nine;
+mod day_ten;
 mod day_fifteen;
 
 use clap::Parser;
