@@ -10,6 +10,7 @@ mod day_eigth;
 mod day_nine;
 mod day_ten;
 mod day_fifteen;
+mod day_seventeen;
 
 use clap::Parser;
 use utils::challenge_init::call_challenge;

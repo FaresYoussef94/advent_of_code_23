@@ -1,13 +1,14 @@
 use array2d::Array2D;
 use crate::utils::file_reader::read_lines;
 
-const ROWS:usize = 5;
-const COLUMNS:usize = 5; 
+const ROWS:usize = 140;
+const COLUMNS:usize = 140; 
 
 pub fn d10p1(){
     let (x,y,maze) = get_maze();
     println!("{} {}", x, y);
-    let result = get_furtherest_point(x, y, maze);
+    let loop_size = get_furtherest_point(x, y, maze);
+    let result = loop_size/2 + loop_size%2;
     println!("D10P1 result: {}", result);
 }
 
@@ -38,85 +39,90 @@ pub fn get_maze() -> (usize, usize, Array2D<char>) {
     (x, y, maze)
 } 
 
-fn get_furtherest_point(x:usize, y:usize, maze:Array2D<char>) -> u32 {
+fn get_furtherest_point(i:usize, j:usize, maze:Array2D<char>) -> u32 {
     let mut result:u32 = 1;
-    let mut prev_x = x;
-    let mut prev_y = y;
+    let mut prev_i = i;
+    let mut prev_j = j;
 
-    let (mut curr_x, mut curr_y) = get_first_point(x, y, &maze);
+    let (mut curr_i, mut curr_j) = get_first_point(i, j, &maze);
     
-    while maze.get(curr_y, curr_x).unwrap().to_string() != 'S'.to_string() {
-        println!("{}\n{}{}\n{}{}", maze.get(curr_y, curr_x).unwrap(),prev_x, prev_y, curr_x, curr_y);
-        let (next_x, next_y) = get_next_point(maze.get(curr_y, curr_x).unwrap(), prev_x, prev_y, curr_x, curr_y);
-        println!("{}{}", next_x, next_y);
-        prev_x = curr_x;
-        prev_y = curr_y;
-        curr_x = next_x;
-        curr_y = next_y;
+    while maze.get(curr_i, curr_j).unwrap().to_string() != 'S'.to_string() {
+        println!("current point:{}\nprev x,y: {}{}\ncurr x,y{}{}", maze.get(curr_i, curr_j).unwrap(),prev_i, prev_j, curr_i, curr_j);
+        let (next_i, next_j) = get_next_point(maze.get(curr_i, curr_j).unwrap(), prev_i, prev_j, curr_i, curr_j);
+        println!("next xy:{}{}", next_i, next_j);
+        println!("next char:{}", maze.get(next_i, next_j).unwrap());
+        prev_i = curr_i;
+        prev_j = curr_j;
+        curr_i = next_i;
+        curr_j = next_j;
         result += 1;
     }
 
     result
 }
 
-fn get_first_point(x:usize, y:usize, maze:&Array2D<char>) -> (usize, usize) {
-    if maze.get(y-1, x).unwrap().to_string() == "-" || maze.get(y-1, x).unwrap().to_string() == "L" || maze.get(y-1, x).unwrap().to_string() == "F" {
-        return (x, y-1)
-    } 
-    (x-1,y)
+fn get_first_point(i:usize, j:usize, maze:&Array2D<char>) -> (usize, usize) {
+    if i > 0 && (maze.get(i-1, j).unwrap().to_string() == "|" || maze.get(i-1, j).unwrap().to_string() == "L" || maze.get(i-1, j).unwrap().to_string() == "J") {
+        return (i-1, j);
+    } else if i < ROWS - 1 && (maze.get(i+1, j).unwrap().to_string() == "|" || maze.get(i+1, j).unwrap().to_string() == "7" || maze.get(i+1, j).unwrap().to_string() == "F") {
+        return (i+1, j);
+    } else if j > 0 && (maze.get(i, j-1).unwrap().to_string() == "-" || maze.get(i, j-1).unwrap().to_string() == "L" || maze.get(i, j-1).unwrap().to_string() == "F") {
+        return (i, j-1);
+    }
+    (i,j+1)
 }
 
-fn get_next_point(curr_pipe:&char, prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
+fn get_next_point(curr_pipe:&char, prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
     match *curr_pipe {
-        '|' => {return handle_north_south(prev_x, prev_y, curr_x, curr_y)},
-        '-' => {return handle_east_west(prev_x, prev_y, curr_x, curr_y)},
-        'L' => {return handle_north_east(prev_x, prev_y, curr_x, curr_y)},
-        'J' => {return handle_north_west(prev_x, prev_y, curr_x, curr_y)},
-        'F' => {return handle_east_south(prev_x, prev_y, curr_x, curr_y)},
-        '7' => {return handle_west_south(prev_x, prev_y, curr_x, curr_y)},
+        '|' => {return handle_north_south(prev_i, prev_j, curr_i, curr_j)},
+        '-' => {return handle_east_west(prev_i, prev_j, curr_i, curr_j)},
+        'L' => {return handle_north_east(prev_i, prev_j, curr_i, curr_j)},
+        'J' => {return handle_north_west(prev_i, prev_j, curr_i, curr_j)},
+        'F' => {return handle_east_south(prev_i, prev_j, curr_i, curr_j)},
+        '7' => {return handle_west_south(prev_i, prev_j, curr_i, curr_j)},
          _ => unimplemented!("Found unimplemented character: {}", curr_pipe),
     }
 }
 
-fn handle_north_south(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_y < curr_y {
-        return (curr_x, curr_y+1);
+fn handle_north_south(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_i < curr_i {
+        return (curr_i+1, curr_j);
     }
-    (curr_x,curr_y-1)
+    (curr_i-1,curr_j)
 }
 
-fn handle_east_west(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_x < curr_x {
-        return (curr_x + 1, curr_y)
+fn handle_east_west(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_j < curr_j {
+        return (curr_i, curr_j + 1)
     }
-    (curr_x - 1, curr_y)
+    (curr_i, curr_j- 1)
 }
 
-fn handle_north_east(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_y == curr_y {
-        return (curr_x, curr_y+1)
+fn handle_north_east(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_i == curr_i {
+        return (curr_i-1, curr_j)
     }
-    (curr_x+1, curr_y)
+    (curr_i, curr_j+1)
 }
 
-fn handle_north_west(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_y == curr_y {
-        return (curr_x, curr_y+1)
+fn handle_north_west(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_i == curr_i {
+        return (curr_i-1, curr_j)
     }
-    (curr_x-1, curr_y)
+    (curr_i, curr_j-1)
 }
 
-fn handle_east_south(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_y == curr_y {
-        return (curr_x, curr_y-1)
+fn handle_east_south(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_i == curr_i {
+        return (curr_i+1, curr_j)
     }
-    (curr_x+1, curr_y)
+    (curr_i, curr_j+1)
 }
 
-fn handle_west_south(prev_x:usize, prev_y:usize, curr_x:usize, curr_y:usize) -> (usize,usize) {
-    if prev_y == curr_y {
-        return (curr_x, curr_y-1)
+fn handle_west_south(prev_i:usize, prev_j:usize, curr_i:usize, curr_j:usize) -> (usize,usize) {
+    if prev_i == curr_i {
+        return (curr_i+1, curr_j)
     }
-    (curr_x-1, curr_y)
+    (curr_i, curr_j-1)
 }
 
